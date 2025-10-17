@@ -43,8 +43,10 @@ test.js
 *.cer
 *.pfx 
 *.pem
+*.txt
 
 package-lock.json
 
 test.json
 test1.json
+

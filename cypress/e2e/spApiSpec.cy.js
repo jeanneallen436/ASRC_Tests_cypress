@@ -83,18 +83,18 @@ import '../support/commands.js'
 //     })
     
 // });
-
+const currTime = `${new Date(Date.now()).getMilliseconds()}`
 describe('creates a sp site with rsa key', () => {
     let accessToken;
 
     before(() => {
         cy.task('getAccessToken').then((token) => {
-            // cy.log(token);
+            cy.log(token);
             accessToken = token;
         })
     })
     it('creates a site and adds a test flag', () => {
-        cy.pause();
+        // cy.pause();
         cy.request({
             method: 'POST',
             url: 'https://craftranker.sharepoint.com/sites/DocumentCenterSiteCollection/_api/web/webs/add',
@@ -104,14 +104,14 @@ describe('creates a sp site with rsa key', () => {
                 Accept: 'application/json;odata=verbose'
             },
             body: {
-                parameters: {
+                'parameters': {
 
                     '__metadata': { 'type': 'SP.WebCreationInformation' },               
-                    Url: 'test-site-02', 
-                    Title: "Test Site 02",
-                    Description: "Test site created by Cypress [TEST-SITE]",
-                    Language: 1033,
-                    WebTemplate: 'STS#3',
+                    'Url': `test-site-${currTime}`, 
+                    'Title': `Test Site ${currTime}`,
+                    'Description': "Test site created by Cypress [TEST-SITE]",
+                    'Language': 1033,
+                    'WebTemplate': 'STS#3',
                     "UseSamePermissionsAsParentSite": false               
                 }
             }
@@ -120,7 +120,7 @@ describe('creates a sp site with rsa key', () => {
             const newSiteUrl = res.body.d.Url;
             cy.log('URL:', res.body.d.Url);
 
-            cy.pause();
+            // cy.pause();
 
             //Set custom property (TEST flag)
             cy.request({

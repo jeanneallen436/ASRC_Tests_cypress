@@ -59,20 +59,20 @@ describe('JWT Bearer Flow Test', () => {
       cy.log('Instance URL: ', auth.instance_url);
 
       // "/services/data/v58.0/sobjects/Opportunity/006ct00000AHEATAA5"
-      const q = "SELECT Id, Name, StageName, Amount, CloseDate, IsPrivate FROM opportunity LIMIT 25";
+      // const q = "SELECT Id, Name, StageName, Amount, CloseDate, IsPrivate FROM opportunity LIMIT 25";
       //WHERE Name='Private Long Opportunity'
       
       cy.request({
         method: 'GET',
-        url: `${auth.instance_url}/services/data/v58.0/query`,
-        // url: `${auth.instance_url}/services/data/v58.0/sobjects/Opportunity/006ct00000AS7btAAD`,
+        // url: `${auth.instance_url}/services/data/v58.0/query`,
+        url: `${auth.instance_url}/services/data/v58.0/sobjects/Opportunity/006ct00000AS7btAAD`,
         headers: {
           'Authorization': `Bearer ${auth.access_token}`,
           'Content-Type': 'application/json'
         },
-        qs: {
-          q: q
-        }
+        // qs: {
+        //   q: q
+        // }
       }).then(response => {
         expect(response.status).to.eq(200);
         cy.log('Opportunity metadata: ', JSON.stringify(response.body));
